@@ -1,0 +1,80 @@
+//lalithkumar.g
+//S20200010065
+#include <stdio.h>
+#include <stdlib.h>
+int arr[10],i=0,h=0,k=0;
+
+struct node{
+  int x;
+  int h;
+  struct node *left;
+  struct node *right;
+};  
+struct node* createnn(int x){
+  struct node a=(struct node)malloc(sizeof(struct node));
+  a->x=x;
+  a->left=NULL;
+  a->right=NULL;
+  return a;
+}
+
+struct node* insert(struct node* root,int x){
+  if(root==NULL){
+  root=createnn(x);
+  root->h=i;}
+  else if(root->x>x){
+    i++;
+  root->left=insert(root->left,x);
+  }
+  else{
+    i++;
+  root->right=insert(root->right,x);
+  }
+  if(i>h)
+  h=i;
+  return root;
+
+}
+int ancestor(struct node* root,int no){
+  if(no==root->x)
+  return 1;
+  else if(no<root->x){
+  arr[k]=root->x;
+  k++;
+  return ancestor(root->left,no);;}
+  else{
+   arr[k]=root->x;
+  k++;
+   return ancestor(root->right,no); 
+  }
+  return 0;
+}
+void inorder(struct node *root){
+  if(root!=NULL){
+    if(root->h>=i){
+    printf("%d ",root->x);
+    i++;}
+  inorder(root->left);
+  inorder(root->right);}
+}
+int main(){
+  int ar[4]={50,30,70,60};
+  struct node *root=NULL;
+  root=insert(root,ar[0]);
+  i=0;
+  insert(root,ar[1]);
+  i=0;
+  insert(root,ar[2]);
+  i=0;
+  insert(root,ar[3]);
+  i=0;
+  insert(root,40);
+  i=0;
+  inorder(root);
+  printf("\n%d\n",h);
+  int c=ancestor(root,40);
+  printf("ancestors:\n");
+    for(int j=k-1;j>=0;j--){
+      printf("%d ",arr[j]);
+    }
+}
